@@ -1,8 +1,8 @@
 import readlineSync from 'readline-sync';
 
 const MAX_RANDOM_INT = 100;
-// const MAX_ITERATIONS = 20;
-const WINS = 3;
+const MAX_ITERATIONS = 20;
+const MAX_WINS_COUNT = 3;
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -28,9 +28,18 @@ export default function even() {
   const randomInt = getRandomInt(MAX_RANDOM_INT);
 
   let i = 0;
-  while (i < WINS) {
+  let winsCount = 0;
+
+  while (i < MAX_ITERATIONS) {
+    if (winsCount === MAX_WINS_COUNT) {
+      console.log(`Congratulations, ${name}!`);
+      return true;
+    }
+    i += 1;
     if (iterate(randomInt)) {
-      i += 1;
+      winsCount += 1;
     }
   }
+
+  return false;
 }
